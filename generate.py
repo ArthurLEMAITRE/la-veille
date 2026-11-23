@@ -1,7 +1,7 @@
 """La Veille — génère l'édition du matin.
 
 Étapes :
-  1. Recherche : Claude fouille le web (outil web_search côté serveur) et rédige un dossier de recherche.
+  1. Recherche : une requête courte par rubrique (modèle économique + outil web_search) produit un dossier.
   2. Rédaction : Claude transforme le dossier en édition structurée (JSON validé par schéma).
   3. Rendu : l'édition est mise en page (render.py) et écrite dans docs/ pour GitHub Pages.
 
@@ -24,11 +24,27 @@ from render import publish_edition, load_index
 ROOT = Path(__file__).parent
 DOCS = ROOT / "docs"
 
-MODEL = os.environ.get("VEILLE_MODEL", "claude-opus-5-5")
-EFFORT_RESEARCH = os.environ.get("VEILLE_EFFORT_RESEARCH", "high")
-EFFORT_WRITING = os.environ.get("VEILLE_EFFORT_WRITING", "high")
-MAX_SEARCHES = int(os.environ.get("VEILLE_MAX_SEARCHES", "40"))
-TZ = ZoneInfo(os.environ.get("VEILLE_TZ", "Europe/Paris"))
+def _env(name: str, default: str) -> str:
+    return os.environ.get(name) or default  # une variable vide compte comme absente
+
+
+# Recherche : un modèle économique, une requête courte par rubrique (le contexte reste petit).
+# Rédaction : un modèle plus fort, une seule requête sans outil.
+RESEARCH_MODEL = _env("VEILLE_RESEARCH_MODEL", "claude-haiku-5-5")
+WRITING_MODEL = _env("VEILLE_WRITING_MODEL", "claude-sonnet-5-5")
+EFFORT_RESEARCH = _env("VEILLE_EFFORT_RESEARCH", "medium")
+EFFORT_WRITING = _env("VEILLE_EFFORT_WRITING", "medium")
+SEARCHES_PER_SECTION = int(_env("VEILLE_SEARCHES_PER_SECTION", "5"))
+MAX_COST_USD = float(_env("VEILLE_MAX_COST_USD", "1.00"))  # plafond dur par édition
+TZ = ZoneInfo(_env("VEILLE_TZ", "Europe/Paris"))
+
+# Prix publics en $ par million de tokens (entrée, sortie, lecture de cache). Haiku : tarif haut (> 100K) par prudence.
+PRICES = {
+    "claude-haiku-5-5": (0.50, 2.50, 0.05),
+    "claude-sonnet-5-5": (2.00, 10.00, 0.10),
+    "claude-opus-5-5": (4.00, 20.00, 0.20),
+}
+WEB_SEARCH_USD = 0.01  # 10 $ pour 1 000 recherches
 
 JOURS = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
@@ -49,22 +65,29 @@ Ses centres d'intérêt, qui forment les quatre rubriques du journal :
 - Géopolitique (conflits, énergie, contrôle des exportations et des investissements, diplomatie, alliances)
 - Entrepreneuriat & capital (levées notables, structures de tours, IPO, M&A, marchés, taux, agenda macro)"""
 
-RESEARCH_SYSTEM = f"""Tu es le chef de la recherche d'un quotidien personnel, « La Veille ».
+RESEARCH_SECTIONS = {
+    "robotique": "Robotique : modèles VLA et fondation pour robots, manipulation, humanoïdes, perception, actionneurs, "
+                 "déploiements industriels, levées et rachats du secteur.",
+    "technologies": "Technologies : IA (modèles, infrastructure), semi-conducteurs, packaging, photonique, mémoire, calcul, "
+                    "énergie, quantique, spatial.",
+    "geopolitique": "Géopolitique : conflits, énergie, contrôle des exportations et des investissements, diplomatie, alliances.",
+    "capital": "Entrepreneuriat & capital : levées notables, IPO, M&A, plus les chiffres de marché du dernier jour de cotation "
+               "(indices, taux, pétrole, devises) et l'agenda macro des jours à venir.",
+}
+
+RESEARCH_SYSTEM = f"""Tu es documentaliste pour un quotidien personnel, « La Veille ».
 {READER}
 
-Ta tâche : produire un dossier de recherche sur l'actualité des dernières 24 à 48 heures, qui servira à rédiger l'édition du matin.
+Ta tâche : produire le dossier de recherche d'UNE rubrique sur l'actualité des dernières 24 à 48 heures.
+Tu disposes d'un nombre limité de recherches web : utilise-les avec méthode.
+- Une ou deux recherches larges pour repérer les sujets importants des deux derniers jours.
+- Puis des recherches ciblées sur les 3 sujets les plus importants, pour obtenir le détail technique et, si possible,
+  la source primaire (communiqué, dépôt réglementaire, papier arXiv, texte officiel).
+- Ne reprends pas un sujet déjà couvert dans les éditions précédentes (liste fournie), sauf fait nouveau.
 
-Méthode :
-- Commence par des recherches larges par rubrique pour repérer les sujets importants des deux derniers jours.
-- Retiens 3 à 4 sujets par rubrique, plus quelques brèves. Privilégie ce qui a une portée technique, industrielle ou stratégique réelle.
-- Pour chaque sujet retenu, fais au moins une recherche de second niveau pour obtenir le détail technique et, si possible, la source primaire
-  (communiqué, dépôt réglementaire type 8-K, papier arXiv, texte officiel, déclaration publique).
-- Relève aussi : les chiffres de marché du dernier jour de cotation (indices, taux, pétrole, etc.) et l'agenda des jours à venir.
-- Ne reprends pas un sujet déjà couvert dans les éditions précédentes (liste fournie), sauf fait nouveau ; dans ce cas précise ce qui a changé.
-
-Format du dossier (texte, pas de JSON) : une section par rubrique ; pour chaque sujet : les faits datés, les chiffres, le détail technique,
-les points de désaccord entre sources, et la liste des URL consultées avec le nom du média. Signale clairement ce qui n'est pas confirmé.
-N'invente rien : si une information manque, écris qu'elle manque."""
+Format (texte, pas de JSON, 600 à 1 000 mots) : pour chaque sujet, les faits datés, les chiffres, le détail technique,
+les désaccords entre sources, puis les URL consultées avec le nom du média. Ajoute 2 ou 3 brèves en une ligne chacune.
+Signale ce qui n'est pas confirmé. N'invente rien : si une information manque, écris qu'elle manque."""
 
 WRITING_SYSTEM = f"""Tu es le rédacteur en chef de « La Veille », un quotidien personnel au format journal papier.
 {READER}
@@ -148,21 +171,41 @@ EDITION_SCHEMA = {
 # --------------------------------------------------------------------------- appels API
 
 
+class Budget:
+    """Additionne le coût estimé de chaque réponse et arrête tout au-delà du plafond."""
+
+    def __init__(self, cap: float):
+        self.cap, self.spent = cap, 0.0
+
+    def add(self, label: str, model: str, message) -> None:
+        u = message.usage
+        p_in, p_out, p_cache = PRICES.get(model, PRICES["claude-opus-5-5"])
+        searches = getattr(getattr(u, "server_tool_use", None), "web_search_requests", 0) or 0
+        cache_read = getattr(u, "cache_read_input_tokens", 0) or 0
+        cache_write = getattr(u, "cache_creation_input_tokens", 0) or 0
+        cost = ((u.input_tokens + cache_write * 1.25) * p_in + cache_read * p_cache + u.output_tokens * p_out) / 1e6
+        cost += searches * WEB_SEARCH_USD
+        self.spent += cost
+        print(f"  [{label}] {model} entrée={u.input_tokens} sortie={u.output_tokens} recherches={searches} "
+              f"stop={message.stop_reason} coût≈{cost:.3f} $ (total≈{self.spent:.3f} $)", flush=True)
+
+    def check(self) -> None:
+        if self.spent > self.cap:
+            raise RuntimeError(f"Plafond de dépense atteint ({self.spent:.2f} $ > {self.cap:.2f} $) : édition abandonnée.")
+
+
 def _client():
     import anthropic
-    return anthropic.Anthropic(max_retries=4, timeout=1800)
+    return anthropic.Anthropic(max_retries=3, timeout=900)
 
 
-def _stream(client, **kwargs):
-    """Requête en streaming, avec repli serveur en cas de refus de sécurité."""
-    with client.beta.messages.stream(
-        model=MODEL,
-        max_tokens=64000,
-        thinking={"type": "adaptive"},
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
-        **kwargs,
-    ) as stream:
+def _stream(client, model: str, max_tokens: int, **kwargs):
+    """Requête en streaming. Repli serveur en cas de refus sur Sonnet/Opus (Haiku n'en a pas)."""
+    extra = {}
+    if "haiku" not in model:
+        extra = {"betas": ["server-side-fallback-2026-07-01"], "fallbacks": "default"}
+    with client.beta.messages.stream(model=model, max_tokens=max_tokens, thinking={"type": "adaptive"},
+                                     **extra, **kwargs) as stream:
         return stream.get_final_message()
 
 
@@ -170,43 +213,47 @@ def _text(message) -> str:
     return "".join(b.text for b in message.content if getattr(b, "type", None) == "text")
 
 
-def _usage_line(label, message):
-    u = message.usage
-    print(f"  [{label}] tokens entrée={u.input_tokens} sortie={u.output_tokens} stop={message.stop_reason}", flush=True)
+def _search_tool(model: str) -> dict:
+    kind = "web_search_20250305" if "haiku" in model else "web_search_20260209"
+    return {"type": kind, "name": "web_search", "max_uses": SEARCHES_PER_SECTION}
 
 
-def research(client, today: datetime, previous_headlines: list[str]) -> str:
-    prev = "\n".join(f"- {h}" for h in previous_headlines) or "(aucune)"
+def research_section(client, budget: Budget, section: str, today: datetime, prev: str) -> str:
     user = (f"Nous sommes le {date_fr(today)} ({today:%Y-%m-%d}), heure de Paris. "
             f"Couvre l'actualité de la veille et de l'avant-veille.\n\n"
-            f"Sujets déjà traités dans les dernières éditions :\n{prev}\n\n"
-            f"Produis le dossier de recherche.")
+            f"Rubrique : {RESEARCH_SECTIONS[section]}\n\n"
+            f"Sujets déjà traités dans les dernières éditions :\n{prev}\n\nProduis le dossier de cette rubrique.")
     messages = [{"role": "user", "content": user}]
-    tools = [{"type": "web_search_20260209", "name": "web_search", "max_uses": MAX_SEARCHES}]
-
-    for attempt in range(8):  # reprises après pause_turn
-        msg = _stream(client, system=RESEARCH_SYSTEM, messages=messages, tools=tools,
-                      output_config={"effort": EFFORT_RESEARCH})
-        _usage_line(f"recherche {attempt + 1}", msg)
+    for attempt in range(3):  # reprises après pause_turn
+        budget.check()
+        msg = _stream(client, RESEARCH_MODEL, 16000, system=RESEARCH_SYSTEM, messages=messages,
+                      tools=[_search_tool(RESEARCH_MODEL)], output_config={"effort": EFFORT_RESEARCH})
+        budget.add(f"recherche {section}", RESEARCH_MODEL, msg)
         if msg.stop_reason == "refusal":
-            raise RuntimeError(f"Recherche refusée : {msg.stop_details}")
+            return f"(Recherche indisponible pour cette rubrique : refus du modèle.)"
         if msg.stop_reason == "pause_turn":
             messages = [{"role": "user", "content": user}, {"role": "assistant", "content": msg.content}]
             continue
-        dossier = _text(msg).strip()
-        if not dossier:
-            raise RuntimeError("Le dossier de recherche est vide.")
-        return dossier
-    raise RuntimeError("La recherche n'a pas abouti après 8 reprises.")
+        return _text(msg).strip() or "(Aucun résultat.)"
+    return _text(msg).strip() or "(Recherche interrompue.)"
 
 
-def write_edition(client, dossier: str, today: datetime, number: int) -> dict:
+def research(client, budget: Budget, today: datetime, previous_headlines: list[str]) -> str:
+    prev = "\n".join(f"- {h}" for h in previous_headlines) or "(aucune)"
+    parts = []
+    for section in RESEARCH_SECTIONS:
+        parts.append(f"## {section}\n\n{research_section(client, budget, section, today, prev)}")
+    return "\n\n".join(parts)
+
+
+def write_edition(client, budget: Budget, dossier: str, today: datetime, number: int) -> dict:
+    budget.check()
     user = (f"Édition N° {number}, {date_fr(today)}.\n\n<dossier>\n{dossier}\n</dossier>\n\n"
             f"Rédige l'édition complète au format demandé.")
-    msg = _stream(client, system=WRITING_SYSTEM, messages=[{"role": "user", "content": user}],
+    msg = _stream(client, WRITING_MODEL, 32000, system=WRITING_SYSTEM, messages=[{"role": "user", "content": user}],
                   output_config={"effort": EFFORT_WRITING,
                                  "format": {"type": "json_schema", "schema": EDITION_SCHEMA}})
-    _usage_line("rédaction", msg)
+    budget.add("rédaction", WRITING_MODEL, msg)
     if msg.stop_reason == "refusal":
         raise RuntimeError(f"Rédaction refusée : {msg.stop_details}")
     if msg.stop_reason == "max_tokens":
@@ -237,12 +284,15 @@ def main() -> int:
             print("ANTHROPIC_API_KEY manquante.", file=sys.stderr)
             return 1
         client = _client()
+        budget = Budget(MAX_COST_USD)
         previous = [h for e in index[:5] for h in e.get("headlines", [])]
-        print(f"Recherche ({MODEL}, effort {EFFORT_RESEARCH}, {MAX_SEARCHES} recherches max)…", flush=True)
-        dossier = research(client, today, previous)
+        print(f"Recherche ({RESEARCH_MODEL}, {SEARCHES_PER_SECTION} recherches max par rubrique, "
+              f"plafond {MAX_COST_USD:.2f} $)…", flush=True)
+        dossier = research(client, budget, today, previous)
         (ROOT / "last-dossier.md").write_text(dossier, encoding="utf-8")
-        print(f"Rédaction de l'édition N° {number}…", flush=True)
-        edition = write_edition(client, dossier, today, number)
+        print(f"Rédaction de l'édition N° {number} ({WRITING_MODEL})…", flush=True)
+        edition = write_edition(client, budget, dossier, today, number)
+        print(f"Coût estimé de l'édition : {budget.spent:.2f} $", flush=True)
 
     edition["number"] = number
     edition["date"] = f"{today:%Y-%m-%d}"

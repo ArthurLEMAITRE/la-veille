@@ -32,7 +32,11 @@ jobs:
       - name: Rechercher et rédiger l'édition
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          VEILLE_MODEL: ${{ vars.VEILLE_MODEL || 'claude-opus-5-5' }}
+          # Réglages facultatifs : Settings → Secrets and variables → Actions → onglet Variables.
+          VEILLE_RESEARCH_MODEL: ${{ vars.VEILLE_RESEARCH_MODEL }}
+          VEILLE_WRITING_MODEL: ${{ vars.VEILLE_WRITING_MODEL }}
+          VEILLE_MAX_COST_USD: ${{ vars.VEILLE_MAX_COST_USD }}
+          VEILLE_SEARCHES_PER_SECTION: ${{ vars.VEILLE_SEARCHES_PER_SECTION }}
         run: python generate.py
 
       - name: Publier

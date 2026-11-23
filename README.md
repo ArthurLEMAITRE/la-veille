@@ -53,15 +53,22 @@ Ouvre l'adresse du journal :
 | Quoi | Où |
 |---|---|
 | Heure de publication | `.github/workflows/edition.yml`, ligne `cron` (heure UTC) |
-| Modèle | Variable de dépôt `VEILLE_MODEL` (Settings → Variables). Par défaut `claude-opus-5-5`. `claude-sonnet-5-5` coûte environ deux fois moins cher. |
-| Nombre maximal de recherches web | `VEILLE_MAX_SEARCHES` dans `generate.py` (40 par défaut) |
+| Modèle de recherche | Variable de dépôt `VEILLE_RESEARCH_MODEL` (Settings → Secrets and variables → Actions → Variables). Par défaut `claude-haiku-5-5`. |
+| Modèle de rédaction | Variable `VEILLE_WRITING_MODEL`. Par défaut `claude-sonnet-5-5` ; `claude-haiku-5-5` pour réduire encore le coût, `claude-opus-5-5` pour la meilleure qualité (bien plus cher). |
+| Plafond de dépense par édition | Variable `VEILLE_MAX_COST_USD`, par défaut `1.00`. L'édition s'arrête dès que le coût estimé le dépasse (la dernière requête en cours peut le dépasser de quelques dizaines de centimes). |
+| Recherches web par rubrique | Variable `VEILLE_SEARCHES_PER_SECTION`, par défaut `5` (4 rubriques, donc 20 recherches au plus). |
 | Centres d'intérêt, ton, structure | Les textes `READER`, `RESEARCH_SYSTEM` et `WRITING_SYSTEM` dans `generate.py` |
 | Mise en page | `template.html` (styles) et `render.py` (structure) |
 
 ## Coût
 Il n'y a que l'API Anthropic à payer ; GitHub Actions, GitHub Pages et ntfy sont gratuits à cet usage.
-Avec Opus, compte en ordre de grandeur quelques dollars par édition (recherche web comprise). Vérifie le coût réel dans la console
-après les premiers jours, puis ajuste le modèle ou le nombre de recherches.
+Avec les réglages par défaut (Haiku pour la recherche, Sonnet pour la rédaction, 20 recherches au plus), une édition est estimée
+entre 0,40 $ et 0,90 $, recherches web comprises, soit environ 12 à 27 $ par mois. Le journal de chaque exécution (onglet Actions)
+affiche le coût estimé de chaque étape. Compare-le avec la console Anthropic après quelques jours.
+
+Pourquoi la recherche est découpée : dans une requête avec outil de recherche, tout le contexte (y compris les pages déjà lues) est
+refacturé à chaque nouvelle recherche. Une seule longue requête de 40 recherches coûte donc très cher ; quatre requêtes courtes de
+5 recherches, avec un modèle économique, coûtent une fraction de ce prix.
 
 ## En local
 ```
