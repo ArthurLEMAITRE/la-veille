@@ -1,0 +1,52 @@
+name: Édition du matin
+
+on:
+  schedule:
+    # 5 h UTC = 6 h à Paris en hiver, 7 h en été. GitHub peut décaler le départ de quelques minutes.
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}  # bouton « Run workflow » pour lancer une édition à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: edition
+  cancel-in-progress: false
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Rechercher et rédiger l'édition
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          VEILLE_MODEL: ${{ vars.VEILLE_MODEL || 'claude-opus-5-5' }}
+        run: python generate.py
+
+      - name: Publier
+        run: |
+          git config user.name "la-veille-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "Édition du $(TZ=Europe/Paris date +%F)"
+          git push
+
+      - name: Attendre la mise en ligne de GitHub Pages
+        run: sleep 90
+
+      - name: Notifier le téléphone
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python notify.py

@@ -1,0 +1,572 @@
+{
+ "coverage": "20 – 22 nov.",
+ "ticker": [
+  {
+   "label": "S&P 500 vs record",
+   "value": "−11,6 %",
+   "trend": "down",
+   "note": "7 séances de baisse, record du 6 oct."
+  },
+  {
+   "label": "Hausse Fed 9 déc.",
+   "value": "98,2 %",
+   "trend": "flat",
+   "note": "probabilité implicite des futures"
+  },
+  {
+   "label": "Brent (20 nov.)",
+   "value": "92,57 $",
+   "trend": "flat",
+   "note": ">105 $ en octobre malgré Ormuz"
+  },
+  {
+   "label": "Anthropic",
+   "value": "88,91 $",
+   "trend": "up",
+   "note": "IPO à 83 $, première semaine"
+  },
+  {
+   "label": "Spread CCC",
+   "value": "+45 pb",
+   "trend": "down",
+   "note": "sur la semaine, high yield"
+  }
+ ],
+ "lead": {
+  "kicker": "Marchés · Taux · IA",
+  "headline": "L'IA rattrapée par le coût du capital",
+  "dek": "Le S&P 500 est entré en correction après sept séances de baisse. Le marché ne doute pas seulement des flux de trésorerie de l'IA : il change le taux auquel il les actualise.",
+  "size": "wide",
+  "paragraphs": [
+   "Vendredi 20 novembre, l'indice a clôturé environ 11,6 % sous son record du 6 octobre. C'est sa première correction depuis mars 2025, et la plus longue série de séances perdantes depuis 2020. Le Nasdaq a suivi. L'introduction en bourse d'Anthropic, censée relancer le thème, est devenue un motif de vente de plus : prix d'IPO à 83 $, +17 % le jour de la cotation, puis −12,5 % le lendemain, et une clôture hebdomadaire à 88,91 $.",
+   "Deux forces jouent en même temps. Au numérateur, les investisseurs doutent que le rythme des dépenses en data centers soit soutenable, c'est-à-dire que les revenus suivent les investissements avant que la dépréciation des GPU ne rattrape les comptes. Au dénominateur, les fed funds futures pricent à 98,2 % une hausse de taux lors du FOMC des 8 et 9 décembre, et Nuveen note que d'autres hausses sont attendues début 2027. Le 10 ans américain n'est repassé sous 5 % que grâce à des achats de valeur refuge.",
+   "Le signal le plus discret vient du crédit. Les spreads des obligations notées CCC et moins se sont écartés de 45 points de base en une semaine. Or une part croissante de la construction de data centers est financée par la dette : si le bas de la structure de capital se ferme, c'est le rythme physique du déploiement qui ralentit, pas seulement les multiples.",
+   "S'ajoute une prime de gouvernance sur le premier poids de l'indice : Nvidia n'a toujours pas de directeur général permanent depuis la démission de Jensen Huang le 12 novembre (voir Technologies)."
+  ],
+  "box": {
+   "title": "Sous le capot : la duration d'une valeur de croissance",
+   "paragraphs": [
+    "Avec un modèle de Gordon simple, le multiple vaut 1 / (r − g). Une action tech est un actif à longue duration : l'essentiel de sa valeur est dans les flux lointains.",
+    "Cent points de base de prime de risque ou de taux en plus suffisent à expliquer une correction de cette ampleur sans aucune révision de bénéfices. Chiffres illustratifs."
+   ],
+   "formula": "r = 9 %,  g = 5 %  →  multiple 25×\nr = 10 %, g = 5 %  →  multiple 20×  (−20 %)"
+  },
+  "watch": "Mercredi 25 : PCE d'octobre (l'indicateur d'inflation suivi par la Fed), deuxième estimation du PIB du T3 et Beige Book. Une inflation sous-jacente forte rendrait crédible une hausse « hawkish », c'est-à-dire suivie d'autres.",
+  "reliability": "concordantes",
+  "reliability_note": "Les chiffres du premier jour de cotation d'Anthropic varient selon les sources.",
+  "sources": [
+   {
+    "name": "CNBC",
+    "url": "https://www.cnbc.com/2026/11/20/sp-500-correction-market-sell-off.html"
+   },
+   {
+    "name": "Reuters via Global News",
+    "url": "https://globalnews.ca/news/12159879/anthropic-stock-correction/"
+   },
+   {
+    "name": "CNBC, semaine à venir",
+    "url": "https://www.cnbc.com/2026/11/20/stock-market-next-week-outlook-for-nov-23-27-2026.html"
+   },
+   {
+    "name": "Nuveen",
+    "url": "https://www.nuveen.com/en-us/insights/fixed-income/fixed-income-weekly-commentary"
+   },
+   {
+    "name": "Edward Jones",
+    "url": "https://www.edwardjones.com/us-en/market-news-insights/stock-market-news/stock-market-weekly-update"
+   }
+  ]
+ },
+ "side": {
+  "figure_value": "16 nm",
+  "figure_text": "Le nouveau seuil des fondeurs pour les puces conçues en Chine. C'est aussi le premier nœud FinFET de TSMC : Washington renvoie de fait les concepteurs chinois au planaire (28 et 40 nm).",
+  "agenda": [
+   {
+    "when": "Mer. 25",
+    "what": "Commandes de biens durables (oct.), PIB T3 2e estimation, PCE (oct.), Beige Book"
+   },
+   {
+    "when": "Jeu. 26",
+    "what": "Thanksgiving : marchés américains fermés"
+   },
+   {
+    "when": "Ven. 27",
+    "what": "Clôture anticipée à 13 h (heure de New York)"
+   },
+   {
+    "when": "8–9 déc.",
+    "what": "FOMC, décision de taux"
+   }
+  ],
+  "takeaways": [
+   "Les rounds signés la semaine du 17 novembre l'ont été avant le creux. Le prochain trimestre dira si les valorisations suivent le public.",
+   "Les contrats indexés sur la performance (Path Robotics et HII) servent de garantie aux investisseurs en hardware.",
+   "Une hausse de taux renchérit d'abord la dette d'infrastructure. Les modèles qui louent du calcul y sont exposés indirectement."
+  ]
+ },
+ "sections": [
+  {
+   "id": "robotique",
+   "subtitle": "Modèles VLA, perception industrielle, simulation",
+   "stories": [
+    {
+     "kicker": "Modèles fondation · DeepMind",
+     "headline": "Gemini Robotics 2.5 sépare le planificateur de la politique motrice",
+     "dek": "96 % de réussite sur une ligne automobile avec l'humanoïde Apollo 2. Le chiffre impressionne, mais il manque le dénominateur.",
+     "size": "wide",
+     "paragraphs": [
+      "Présenté le 13 novembre, Gemini Robotics 2.5 repose sur une architecture à deux modèles. Gemini Robotics-ER (pour *embodied reasoning*) suit l'état de la tâche, décompose la séquence en sous-étapes et replanifie quand l'environnement change. Le modèle vision-langage-action (VLA) Gemini Robotics 2.5 produit les commandes du bras et de la main.",
+      "Côté matériel, le modèle est annoncé compatible avec l'Apollo 2 d'Apptronik, équipé d'une main SharpaWave à cinq doigts et 22 degrés de liberté, ainsi qu'avec la plateforme bimanuelle Franka Duo. Le pilote automobile, rapporté sur une ligne Mercedes-Benz, porte sur la manipulation de pièces avec un taux de réussite de 96 %.",
+      "Pour mémoire, la version 2025 hébergeait déjà le backbone VLA dans le cloud et faisait tourner un décodeur d'actions local sur l'ordinateur embarqué du robot, pour absorber la latence réseau. La séparation planificateur / contrôleur va plus loin : elle découple aussi les horizons temporels.",
+      "**La réserve.** Un taux de 96 % sans nombre d'essais, sans temps de cycle comparé à un opérateur, ni définition de l'échec (reprise humaine ? pièce endommagée ?) ne permet pas de juger la viabilité en production. En cadence automobile, 4 % d'échecs représentent plusieurs interventions par heure."
+     ],
+     "box": {
+      "title": "Sous le capot : pourquoi deux boucles",
+      "paragraphs": [
+       "Un VLM qui raisonne travaille à l'échelle de la seconde. Une main à 22 DDL demande des consignes à plusieurs dizaines de hertz, en général émises par paquets d'actions (*action chunks*) que le contrôleur bas niveau interpole. Mettre le raisonnement dans une boucle lente et la motricité dans une boucle rapide évite que la latence du raisonnement ne déstabilise le contact.",
+       "Le prix à payer : l'interface entre les deux (sous-buts en langage, points clés, trajectoires ?) devient le point de défaillance. DeepMind n'a pas publié de rapport technique détaillant ce choix."
+      ],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "secondaire",
+     "reliability_note": "Aucun rapport technique primaire trouvé pour la v2.5.",
+     "sources": [
+      {
+       "name": "Troy Technical",
+       "url": "https://troy-technical.com/2026/11/15/gemini-robotics-2-5-performance-and-mercedes-benz-factory-tests/"
+      },
+      {
+       "name": "DEV Community",
+       "url": "https://dev.to/paullovelace/gemini-robotics-25-put-humanoids-on-a-real-mercedes-line-96-success-and-one-big-catch-5gje"
+      },
+      {
+       "name": "arXiv 2503.20020 (architecture 2025)",
+       "url": "https://arxiv.org/abs/2503.20020"
+      }
+     ]
+    },
+    {
+     "kicker": "Soudage autonome",
+     "headline": "Path Robotics lève 300 M$ sur la vision laser",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "Le modèle Obsidian pilote la torche de soudage à partir de quatre lasers fixés sur celle-ci. Des caméras captent la lumière réfléchie par les pièces, ce qui permet de trouver le joint, de planifier le cordon et de corriger en continu, sans programme figé au pupitre d'apprentissage.",
+      "Pourquoi le soudage comme point d'entrée : en production variée et petite série, les tolérances des pièces et la déformation thermique font échouer les trajectoires pré-enregistrées. La triangulation laser donne la géométrie réelle du joint au moment de souder.",
+      "Série E menée par Georgian, valorisation post-money de 2,45 Md$, ARR multiplié par 17 en 18 mois. Path présente aussi Rove, Obsidian monté sur un quadrupède, et s'appuie sur un contrat de 600 M$ indexé sur la performance avec HII pour la construction navale de l'US Navy."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "concordantes",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "SiliconANGLE",
+       "url": "https://siliconangle.com/2026/11/10/industrial-automation-startup-path-robotics-raises-300m-in-funding/"
+      },
+      {
+       "name": "TNW",
+       "url": "https://thenextweb.com/news/path-robotics-300m-series-e-2-45bn-valuation"
+      },
+      {
+       "name": "ARR Club",
+       "url": "https://www.arr.club/signal/path-robotics-grew-arr-17-fold-in-18-months-raising-300m-series-e-at-2-45b-valuation"
+      }
+     ]
+    },
+    {
+     "kicker": "Simulation · Données",
+     "headline": "Genesis AI parie que l'évaluation est le vrai goulot",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "Série A de 500 M$ à 3,5 Md$ post-money (Khosla, Premji Invest, Eclipse). La société développe GENE-26.5, son modèle fondation, et Genesis World, un simulateur propriétaire.",
+      "La thèse du CEO Zhou Xian : on ne sait pas évaluer une politique robotique assez vite en réel. Le simulateur fait apparaître les échecs sur un grand nombre de scénarios, et ces échecs orientent ensuite la collecte de données réelles et les modifications du modèle. C'est une boucle d'apprentissage actif plutôt qu'un simple pré-entraînement en simulation.",
+      "Point stratégique : le moteur ne dépend pas de la pile logicielle de Nvidia. Robot phare : Eno, ciblé sur la fabrication et la logistique."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "concordantes",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "TechCrunch",
+       "url": "https://techcrunch.com/2026/11/17/genesis-ai-raises-500-million-to-deploy-electric-glove-wearing-robots/"
+      },
+      {
+       "name": "Robotics 24/7",
+       "url": "https://www.robotics247.com/article/genesis-ai-announces-500m-series-a-at-3.5b-valuation"
+      }
+     ]
+    }
+   ],
+   "briefs": [
+    {
+     "title": "Apptronik × GXO",
+     "text": "Extension à 1 000 humanoïdes sur quatre ans, à partir de 2027. Premier engagement de flotte à cette échelle pour un logisticien."
+    },
+    {
+     "title": "Corvus One chez ASICS America",
+     "text": "Des drones d'inventaire en entrepôt retrouvent le stock mal rangé 60 % plus vite, avec des comptages six fois plus fréquents."
+    },
+    {
+     "title": "Botsync, 11 M$",
+     "text": "Orchestration d'automates multi-fournisseurs en usine et entrepôt : la couche logicielle entre AMR hétérogènes devient un marché."
+    }
+   ],
+   "brief_sources": [
+    {
+     "name": "The Robot Report",
+     "url": "https://www.therobotreport.com/"
+    },
+    {
+     "name": "Robotics 24/7",
+     "url": "https://www.robotics247.com/news"
+    }
+   ]
+  },
+  {
+   "id": "technologies",
+   "subtitle": "Semi-conducteurs, interconnexions, mémoire",
+   "stories": [
+    {
+     "kicker": "Contrôles export · Fonderie",
+     "headline": "Washington supprime l'auto-contrôle des fondeurs",
+     "dek": "La règle du BIS entrée en vigueur le 19 novembre remplace un critère de performance par un critère de nœud. TSMC a annoncé qu'il s'y conformerait.",
+     "size": "wide",
+     "paragraphs": [
+      "Jusqu'ici, TSMC pouvait examiner la puissance de calcul et les caractéristiques d'un design chinois pour établir qu'il sortait du champ des contrôles. Cette voie disparaît. La règle étend les contrôles des puces de calcul avancé à l'ensemble de la logique avancée, et impose des licences aux concepteurs concernés, y compris dans plusieurs pays hors de Chine.",
+      "Selon des informations de Reuters, TSMC a demandé l'arrêt des commandes en 16 nm et en dessous pour les clients sans licence américaine. Les concepteurs chinois sont en pratique ramenés au 28 et au 40 nm, à condition de ne pas utiliser de HBM ni de packaging avancé. D'après le FT, les exemptions pour les puces non IA, smartphones compris, tombent aussi. Samsung aurait suspendu certaines livraisons. Pékin menace de contre-mesures.",
+      "**Contradiction à suivre.** Une information non confirmée fait état de 879 868 puces IA Nvidia et AMD autorisées à l'export vers la Chine par l'administration. Une analyse coréenne voit dans la règle une file d'attente de licences plutôt qu'une coupure. La portée réelle dépendra du taux d'octroi."
+     ],
+     "box": {
+      "title": "Sous le capot : performance contre nœud",
+      "paragraphs": [
+       "L'ancien régime reposait sur des seuils de performance (type TPP, densité de calcul) que le fondeur devait vérifier sur un design qu'il ne connaît qu'en partie. C'était difficile à contrôler et contournable par découpage en chiplets.",
+       "Un seuil par nœud est binaire et vérifiable à la commande. Le 16 nm est le premier nœud FinFET de TSMC : la frontière passe donc entre transistor planaire et transistor 3D. Le dommage collatéral est massif, car presque tout SoC mobile récent est sous 16 nm."
+      ],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "concordantes",
+     "reliability_note": "Seuil cité à 14 ou 16 nm selon les sources.",
+     "sources": [
+      {
+       "name": "Digitimes",
+       "url": "https://digitimes.com/news/a20261120VL218/tsmc-taiwan-chips-communications-samsung.html"
+      },
+      {
+       "name": "Hardware Busters",
+       "url": "https://hwbusters.com/news/tsmc-halts-china-orders-at-16nm-and-below-as-new-us-rules-end-the-foundry-self-check/"
+      },
+      {
+       "name": "VLSI.kr",
+       "url": "https://www.vlsi.kr/en/tsmc-samsung-china-chip-bis-license-en/"
+      }
+     ]
+    },
+    {
+     "kicker": "Photonique · Packaging",
+     "headline": "Nvidia place l'optique sur l'interposeur",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "Montré à SEMICON West 2026, le prototype OOI (*optics-on-interposer*) déplace les moteurs optiques du substrat organique vers l'interposeur silicium qui porte les puces de calcul. Le substrat organique sort du chemin électrique. Démonstration associée : un multiplexage DWDM de 8 longueurs d'onde à 32 Gb/s, soit 256 Gb/s par fibre.",
+      "Aucun calendrier ni client. La cible annoncée concerne les serveurs IA d'après 2028, et les industriels cités par SMM ne voient pas de production en volume avant 2030."
+     ],
+     "box": {
+      "title": "Analyse : pourquoi 32 Gb/s par lambda",
+      "paragraphs": [
+       "Sur l'interposeur, avec un pas de câblage au micron, on peut faire « large et lent » : beaucoup de canaux à faible débit au lieu de SerDes longue portée coûteux en énergie par bit. Les limites : la taille de l'interposeur, bornée par le réticule, et la sensibilité thermique des modulateurs en anneau collés à un GPU de plus de 1 kW."
+      ],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "secondaire",
+     "reliability_note": "Le nom « OOI » n'apparaît pas dans les documents de Nvidia.",
+     "sources": [
+      {
+       "name": "TrendForce",
+       "url": "https://www.trendforce.com/news/2026/10/22/news-nvidia-unveils-next-gen-cpo-prototype-with-optics-on-silicon-interposer-targets-higher-bandwidth-density/"
+      },
+      {
+       "name": "SMM",
+       "url": "https://news.metal.com/newscontent/104189822-nvidia-showcases-next-gen-cpo-prototype-named-ooi"
+      }
+     ]
+    },
+    {
+     "kicker": "Gouvernance",
+     "headline": "Nvidia, onze jours sans directeur général",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "Le formulaire 8-K du 12 novembre acte la démission de Jensen Huang de ses fonctions de président, directeur général et administrateur, avec effet immédiat. Colette Kress, directrice financière, assure l'intérim en gardant ses fonctions.",
+      "Le conseil étudie des candidats internes et externes. Le FT rapporte une approche de Rene Haas (Arm). Les fournisseurs taïwanais déclarent des commandes IA stables."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "primaire",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "SEC 8-K",
+       "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"
+      },
+      {
+       "name": "CNBC",
+       "url": "https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html"
+      }
+     ]
+    },
+    {
+     "kicker": "Mémoire",
+     "headline": "HBM4 : Google envisagerait d'acheter en direct",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "SK Hynix et Micron avancent leurs plans de capacité HBM4. Le signal structurant est ailleurs : Google aurait étudié l'achat direct de HBM.",
+      "Pour un TPU conçu avec Broadcom, cela revient à fournir la mémoire au packageur plutôt que de la laisser au partenaire de conception. Le gain porte sur la marge et surtout sur l'allocation, dans un marché où la HBM est le composant rationné."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "secondaire",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "Digitimes, revue du 16 au 22 nov.",
+       "url": "https://www.digitimes.com/news/a20261123VL200/investment-tsmc-equipment-chips-sk-hynix.html"
+      }
+     ]
+    }
+   ],
+   "briefs": [
+    {
+     "title": "Musk et TSMC",
+     "text": "Le projet de fab texane en propre piétine ; Musk pourrait en confier l'exploitation à TSMC. Fabriquer de la logique avancée sans savoir-faire de fondeur reste hors de portée, même avec un capital illimité."
+    }
+   ],
+   "brief_sources": [
+    {
+     "name": "Digitimes",
+     "url": "https://www.digitimes.com/news/a20261123VL200/weekly-news-roundup-tsmc-sk-hynix-chips-equipment-investment.html"
+    }
+   ]
+  },
+  {
+   "id": "geopolitique",
+   "subtitle": "Énergie, contrôle des investissements, climat",
+   "stories": [
+    {
+     "kicker": "Golfe · Énergie",
+     "headline": "Ormuz : une attaque par jour, et le Brent baisse quand même",
+     "dek": "Le marché pétrolier traite la crise comme un coût de transport, plus comme un risque sur les volumes.",
+     "size": "wide",
+     "paragraphs": [
+      "Selon l'UKMTO, on compte environ une attaque par jour contre des navires en novembre, le niveau le plus élevé depuis le début de la guerre avec l'Iran. Vendredi, un projectile a provoqué un incendie sur un pétrolier à 8 milles nautiques au nord de Khasab. Les Gardiens de la révolution affirment avoir touché un radar de défense aérienne américain à Bahreïn et abattu un drone.",
+      "Pourtant, le Brent a terminé à 92,57 $ le 20 novembre, contre plus de 105 $ en octobre. En début de semaine, il était brièvement passé sous 90 $ sur des espoirs d'accord entre Washington et Téhéran. Le WTI cote autour de 83,45 $.",
+      "**Côté politique.** Deux informations contradictoires circulent : Donald Trump se dirait enclin à reprendre l'offensive faute d'accord d'ici la fin de l'année, tout en ayant dit à ses conseillers qu'il n'escaladerait pas sans provocation de l'Iran ou des Houthis. L'Iran, de son côté, rationne l'énergie."
+     ],
+     "box": {
+      "title": "Sous le capot : pourquoi le prix ne réagit plus",
+      "paragraphs": [
+       "Les flux sortant du Golfe restent sous leur niveau d'avant-guerre, mais le marché les a déjà intégrés. Une attaque supplémentaire change surtout la prime d'assurance « risque de guerre » et le fret, sans retirer de nouveaux barils. Face à cela, l'anticipation d'un retour à l'excédent d'offre pèse dans l'autre sens.",
+       "La tension s'est déplacée vers le gaz, le GNL qatari transitant par le détroit, et vers les actions."
+      ],
+      "formula": ""
+     },
+     "watch": "L'échéance de fin d'année fixée par Washington, et l'écart entre le Brent et les prix spot du GNL en Asie.",
+     "reliability": "concordantes",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "Geopolitics Unplugged",
+       "url": "https://geopoliticsunplugged.substack.com/p/tankers-burned-near-iran-and-brent"
+      },
+      {
+       "name": "OilPrice",
+       "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Steady-as-Hormuz-Tanker-Threats-Offset-Supply-Glut-Fears.html"
+      },
+      {
+       "name": "Anadolu",
+       "url": "https://www.aa.com.tr/en/energy/oil/oil-prices-rise-amid-tanker-attacks-in-strait-of-hormuz/60880"
+      }
+     ]
+    },
+    {
+     "kicker": "Chine · Contrôle des investissements",
+     "headline": "Pékin traite les données robotiques comme un actif stratégique",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "SoftBank a reçu le 4 novembre la notification de l'Office du mécanisme de travail pour l'examen de sécurité des investissements étrangers, rattaché à la NDRC : le rachat de la branche robotique d'ABB (5,4 Md$) est interdit pour sa partie chinoise.",
+      "Selon Reuters, Pékin craint un transfert de données robotiques sensibles vers les États-Unis. La Chine pèse environ 30 % de l'activité robotique d'ABB. La piste étudiée : isoler l'activité chinoise. C'est le deuxième blocage de l'année après le démantèlement imposé à Meta pour Manus en avril."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "primaire",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "SoftBank",
+       "url": "https://group.softbank/en/news/press/20261106"
+      },
+      {
+       "name": "Bloomberg",
+       "url": "https://www.bloomberg.com/news/articles/2026-11-05/china-blocks-softbank-s-acquisition-of-abb-industrial-robot-unit"
+      }
+     ]
+    },
+    {
+     "kicker": "Climat · Multilatéral",
+     "headline": "La COP31 s'effondre sur deux mots",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "À Antalya, dimanche, 44 heures après la clôture officielle, l'UE et une large coalition ont rejeté le texte des co-présidences turque et australienne : il ne mentionnait pas les « combustibles fossiles » et renvoyait seulement de façon indirecte au « transition away » de la COP28. Les pays en développement jugeaient aussi le financement de l'adaptation insuffisant.",
+      "Pas de nouveau projet de texte. Les cadres juridiques existants restent en vigueur, mais aucun signal de relèvement des engagements nationaux ne sort de ce cycle."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "concordantes",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "Al Jazeera",
+       "url": "https://www.aljazeera.com/news/2026/11/22/fossil-fuel-impasse-pushes-cop31-climate-talks-into-second-day-of-overtime"
+      },
+      {
+       "name": "CBS",
+       "url": "https://www.cbsnews.com/news/un-cop31-climate-conference-ends-no-agreement-fossil-fuel-debate-standstill/"
+      }
+     ]
+    }
+   ],
+   "briefs": [
+    {
+     "title": "Groenland",
+     "text": "Le Parlement danois ratifie l'élargissement de l'accès militaire américain à l'île."
+    },
+    {
+     "title": "Ukraine",
+     "text": "Les frappes russes ont lourdement endommagé les infrastructures énergétiques d'Odessa à l'entrée de l'hiver."
+    },
+    {
+     "title": "Mongolie",
+     "text": "Le président démissionnerait sur fond d'enquête. À confirmer."
+    }
+   ],
+   "brief_sources": [
+    {
+     "name": "Geopolitics Explained",
+     "url": "https://geopoliticsexplained.substack.com/p/this-week-in-geopolitics-22nd-november"
+    }
+   ]
+  },
+  {
+   "id": "capital",
+   "subtitle": "Levées, structures de tour, signaux",
+   "stories": [
+    {
+     "kicker": "Biotech computationnelle",
+     "headline": "Isomorphic Labs : 5 Md$, plus gros tour de l'histoire de la biotech",
+     "dek": "",
+     "size": "wide",
+     "paragraphs": [
+      "Série C annoncée le 17 novembre, co-menée par Greenoaks et Sequoia, avec a16z comme nouvel entrant. Tous les investisseurs existants suivent : Thrive, MGX, GV, CapitalG, Temasek et le fonds souverain britannique pour l'IA. La valorisation n'est pas publiée ; Bloomberg évoquait un objectif de 50 Md$. Six mois après une série B de 2,1 Md$, le total externe atteint environ 7,7 Md$.",
+      "Usage annoncé par Demis Hassabis : modèles fondation de biologie, compréhension systémique des maladies, et premiers programmes thérapeutiques vers la clinique."
+     ],
+     "box": {
+      "title": "Analyse : où passe le goulot",
+      "paragraphs": [
+       "Prédire une structure ou une affinité devient bon marché. Ce qui coûte, c'est la validation : chimie, ADMET, toxicologie, puis essais de phase I. Un tour de 5 Md$ finance une organisation pharmaceutique intégrée, pas un laboratoire de modèles. Le vrai test sera le taux d'attrition clinique des molécules conçues par IA."
+      ],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "primaire",
+     "reliability_note": "",
+     "sources": [
+      {
+       "name": "Isomorphic Labs",
+       "url": "https://www.isomorphiclabs.com/articles/isomorphic-labs-announces-series-c-investment-round"
+      },
+      {
+       "name": "TechCrunch",
+       "url": "https://techcrunch.com/2026/11/17/isomorphic-labs-raises-5b-as-it-looks-to-take-drug-candidates-to-clinical-trials/"
+      }
+     ]
+    },
+    {
+     "kicker": "Tendance",
+     "headline": "L'IA physique lève à contre-cycle",
+     "dek": "",
+     "size": "normal",
+     "paragraphs": [
+      "Semaine du 9 novembre : 7,9 Md$ sur 69 tours, menés par Rowan Digital Infrastructure (1,5 Md$), Mirendil (série A de 1 Md$) et Mercor (750 M$ en série D). En robotique, Path (300 M$) et Genesis (500 M$ en série A).",
+      "Le schéma : infrastructures et IA physique adossées à des contrats ou à une traction mesurable. Une série A d'un milliard devient la norme pour la tête du marché, ce qui creuse l'écart avec le reste."
+     ],
+     "box": {
+      "title": "",
+      "paragraphs": [],
+      "formula": ""
+     },
+     "watch": "",
+     "reliability": "secondaire",
+     "reliability_note": "Chiffres agrégés.",
+     "sources": [
+      {
+       "name": "StartupHub",
+       "url": "https://www.startuphub.ai/ai-news/funding-roundup/2026/this-week-in-startup-funding"
+      },
+      {
+       "name": "BestStartup",
+       "url": "https://beststartup.us/us-startup-funding-november-2026/"
+      }
+     ]
+    }
+   ],
+   "briefs": [
+    {
+     "title": "OpenAI",
+     "text": "Première tranche de 11 Md$ sécurisée, dans un tour qui valorise la société 1 250 Md$."
+    }
+   ],
+   "brief_sources": [
+    {
+     "name": "BestStartup",
+     "url": "https://beststartup.us/us-startup-funding-november-2026/"
+    }
+   ]
+  }
+ ],
+ "notification_summary": "IA rattrapée par les taux · Washington coupe l'auto-contrôle des fondeurs · Ormuz : le Brent baisse malgré les attaques",
+ "number": 1,
+ "date": "2026-11-23",
+ "date_label": "Lundi 23 novembre 2026"
+}
